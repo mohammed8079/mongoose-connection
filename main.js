@@ -1,12 +1,14 @@
 import mongoose from "mongoose"
-// console.log("everythin looks fine!")
 
 async function getConnection(){
+    // TODO => 1. replace aggregation with the name of the database to be connected
     await mongoose.connect('mongodb://localhost:27017/aggregation');
 }
 
 getConnection()
 
+/* TODO => 2. replace the object passed to schema to represent the structure 
+of the collection you want to connect*/
 const PersonSchema = mongoose.Schema({
     "index": Number,
     "name": String,
@@ -28,6 +30,10 @@ const PersonSchema = mongoose.Schema({
     "tags": [String]
 });
 
+/* TODO => 3. We have 2 things here
+1. Person is the name of the name of model. Which you can use to add, 
+read, update or delete documents
+2. persons is the name of the collection you want to connect/create.*/
 const Person = mongoose.model('persons', PersonSchema);
 
 Person.find()
@@ -38,6 +44,3 @@ Person.find()
         }
     })
     .catch(err => console.error(err))
-
-// const kitty = new Cat({ name: 'Zildjian' });
-// kitty.save().then(() => console.log('meow'));
